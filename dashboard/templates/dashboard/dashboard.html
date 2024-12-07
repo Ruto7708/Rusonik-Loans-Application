@@ -1,0 +1,176 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+{% block title %}Rusonik Loans Dashboard{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/dashboard/style.css' %}">
+<style>
+    /* Video Banner Section */
+    .video-banner {
+        position: relative;
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .video-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .banner-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .primary-btn {
+        background-color: aqua;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        font-size: 16px;
+    }
+
+    .primary-btn:hover {
+        background-color: #006666;
+    }
+
+    /* Cards Section */
+    .cards-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 40px;
+    }
+
+    .card {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        flex: 1;
+        margin: 0 10px;
+    }
+
+    .card h3 {
+        color: #006666;
+        margin-bottom: 10px;
+    }
+
+    /* Testimonials Section */
+    .testimonials-container {
+        margin-top: 40px;
+    }
+
+    .testimonials-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 0 20px;
+    }
+
+    .testimonial {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    .testimonial p {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .testimonial small {
+        font-weight: bold;
+        color: #333;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Header Section -->
+    <header class="dashboard-header">
+        <h1>Welcome to Rusonik Loans</h1>
+        <a href="{% url 'apply_now' %}"><button class="primary-btn">Apply for a Loan</button></a>
+    </header>
+
+    <!-- Video Banner Section -->
+    <div class="video-banner">
+        <video autoplay muted loop class="video-bg">
+            <source src="{% static 'videos/loan-promo.mp4' %}" type="video/mp4">
+        </video>
+        <div class="banner-content">
+            <h1>Welcome to Rusonik Loans</h1>
+            <p>Your trusted partner for affordable and flexible loans.</p>
+            <a href="{% url 'apply_now' %}" class="primary-btn">Start Now</a>
+        </div>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="cards-container">
+        <div class="card">
+            <h3>Total Loans</h3>
+            <p>KES 500,000</p>
+            <p>Total loans issued this month.</p>
+        </div>
+        <div class="card">
+            <h3>Repaid Loans</h3>
+            <p>KES 300,000</p>
+            <p>Loans successfully repaid.</p>
+        </div>
+        <div class="card">
+            <h3>Pending Loans</h3>
+            <p>KES 200,000</p>
+            <p>Loans yet to be repaid.</p>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonials-container">
+        <h2>User Testimonials</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <img src="{% static 'images/prof1.jpg' %}" alt="User Photo">
+                <p>"Rusonik Loans helped me expand my business with their quick and easy application process!"</p>
+                <small>- Jane Onyango</small>
+            </div>
+            <div class="testimonial">
+                <img src="{% static 'images/prof2.jpg' %}" alt="User Photo">
+                <p>"I love the flexible repayment options. Highly recommend Rusonik Loans!"</p>
+                <small>- John Korir</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/dashboard/scripts.js' %}"></script>
+{% endblock %}

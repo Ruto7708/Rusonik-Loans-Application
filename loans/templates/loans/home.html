@@ -1,0 +1,142 @@
+{% extends 'loans/layout.html' %}
+{% load static %}
+{% block title %}Home - Loan Application{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid home-container">
+        <h1 class="display-4 text-center mt-4">Welcome to Rusonik Loans</h1>
+        <p class="lead text-center">Get your loan applications easily and securely.</p>
+
+        <!-- Full-width Carousel -->
+        <div class="carousel slide" id="carouselExampleControls" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'images/imgg2.jpg' %}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Apply for a Loan Now</h5>
+                        <p>Quick and easy application process.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/imgg4.jpg' %}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Track Your Loan Status</h5>
+                        <p>Check the status of your application anytime.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/bg3.png' %}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Secure and Private</h5>
+                        <p>Your information is protected and safe with us.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/bg4.png' %}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Flexible Payment Plans</h5>
+                        <p>Choose a payment plan that suits you.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+
+        <!-- About Section -->
+       <section class="about-section py-5" style="background-color: #f0f8ff;">
+    <div class="container">
+        <h1 class="display-4 text-center" style="color: #00FFFF;">About Us</h1>
+        <p class="lead text-center mb-4">Rusonik Loans is dedicated to providing fast, secure, and flexible loan options to individuals and businesses alike. Our goal is to make loan applications simple and accessible, without compromising on security or customer service. Whether you need a small personal loan or a larger business loan, we are here to help you every step of the way. We are committed to offering affordable interest rates, transparent terms, and a seamless online application process.</p>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h3 style="color: #00FFFF;">Our Mission</h3>
+                <p>Our mission is to revolutionize the lending industry by offering easy-to-understand loan products, providing fast access to funds, and empowering individuals and businesses to achieve their financial goals. We believe in building trust and maintaining transparency with our clients to ensure their financial well-being.</p>
+            </div>
+            <div class="col-md-6">
+                <h3 style="color: #00FFFF;">Why Choose Rusonik Loans?</h3>
+                <ul>
+                    <li>Fast and secure loan processing with minimal paperwork</li>
+                    <li>Affordable interest rates that make it easier to repay loans</li>
+                    <li>Flexible payment terms to suit your financial needs</li>
+                    <li>24/7 customer support to guide you through the process</li>
+                    <li>Advanced security measures to ensure the safety of your personal information</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <p class="lead">Join thousands of satisfied clients who have successfully used Rusonik Loans to meet their financial needs. Apply today and experience the difference!</p>
+        </div>
+    </div>
+</section>
+
+
+        <br><br><br><br><br>
+
+        <!-- Header Section -->
+        <h1 class="text-aqua">Contact Us</h1>
+
+        <!-- Main Container -->
+        <div class="container contact-container">
+
+            <!-- Contact Information -->
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Our Office</h3>
+                    <p>Tengecha Road Main Street, Kericho Town</p>
+                    <p>Email: rutopius81@gmail.com</p>
+                    <p>Phone: +254708229705</p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="https://linkedin.com" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h3>Send Us a Message</h3>
+                    <form action="{% url 'contact' %}" method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "dashboard/layout.html" %}
+{% block title %}View Status{% endblock %}
+
+{% block content %}
+<div class="status-container">
+    <h1 class="display-5">View Status</h1>
+    <p>Check the status of your loan application.</p>
+
+    <div class="status-card">
+        <h2>Status: <span class="status-text">{{ loan_status.status }}</span></h2>
+        <p>Current Stage: <strong>{{ loan_status.stage }}</strong></p>
+        <p>Remarks: <em>{{ loan_status.remarks }}</em></p>
+    </div>
+
+    <div class="status-actions">
+        {% if loan_status.status == "Pending" %}
+        <a href="{% url 'apply_now' %}" class="btn btn-primary">Upload Documents</a>
+        {% elif loan_status.status == "Rejected" %}
+        <a href="{% url 'apply_now' %}" class="btn btn-danger">Reapply for Loan</a>
+        {% else %}
+        <a href="{% url 'dashboard' %}" class="btn btn-success">Go to Dashboard</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

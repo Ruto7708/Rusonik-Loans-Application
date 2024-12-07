@@ -1,0 +1,278 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+{% block title %}Apply Now{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/dashboard/style.css' %}">
+<style>
+    .aqua-btn {
+        background-color: aqua;
+        color: black;
+        font-size: 9px;  /* Reduced font size by 60% */
+        padding: 6px 12px; /* Reduced padding by 60% */
+        border-radius: 5px;
+        border: 1px solid aqua;
+        transition: background-color 0.3s ease;
+    }
+    .aqua-btn:hover {
+        background-color: #00b8b8;
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: aqua;
+        color: black;
+        font-size: 9px;  /* Reduced font size by 60% */
+        padding: 6px 12px; /* Reduced padding by 60% */
+        border-radius: 5px;
+        border: 1px solid aqua;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        background-color: #00b8b8;
+        color: white;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .application-form-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    /* Flexbox for Previous and Next buttons */
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* To make buttons smaller */
+    .btn-group button {
+        font-size: 9px;
+        padding: 6px 12px;
+    }
+
+    /* To make submit button aqua */
+    #submit-btn {
+        background-color: aqua;
+        color: black;
+        font-size: 9px;
+        padding: 6px 12px;
+        border-radius: 5px;
+        border: 1px solid aqua;
+        transition: background-color 0.3s ease;
+    }
+    #submit-btn:hover {
+        background-color: #00b8b8;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="application-form-container">
+    <h1 class="display-5 text-center">Apply for a Loan</h1>
+    <p class="text-center">Fill in the details below to apply for a loan.</p>
+
+   <form action="{% url 'apply_now' %}" method="POST" class="application-form" enctype="multipart/form-data" id="loan-application-form">
+        {% csrf_token %}
+
+        <!-- Borrower's Personal Details -->
+        <div id="borrower-section">
+            <h3> Personal Details</h3>
+            <div class="form-group">
+                <label for="full_name">Full Name</label>
+                <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="loan_amount">Loan Amount (KES)</label>
+                <input type="number" id="loan_amount" name="loan_amount" class="form-control" placeholder="Enter the loan amount" required>
+            </div>
+
+            <div class="form-group">
+                <label for="loan_duration">Loan Duration (Months)</label>
+                <input type="number" id="loan_duration" name="loan_duration" class="form-control" placeholder="Enter the loan duration" required>
+            </div>
+
+            <div class="form-group">
+                <label for="employment_status">Employment Status</label>
+                <select id="employment_status" name="employment_status" class="form-control" required>
+                    <option value="Employed">Employed</option>
+                    <option value="Self-Employed">Self-Employed</option>
+                    <option value="Unemployed">Unemployed</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="id_number">National ID/Passport Number</label>
+                <input type="text" id="id_number" name="id_number" class="form-control" placeholder="Enter your ID/Passport number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="kra_pin">KRA PIN</label>
+                <input type="text" id="kra_pin" name="kra_pin" class="form-control" placeholder="Enter your KRA PIN" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id_scan">Upload ID Scan (Front & Back)</label>
+                <input type="file" id="id_scan" name="id_scan" class="form-control" accept="image/*" required multiple>
+            </div>
+
+            <div class="form-group">
+                <label for="payslip">Upload Recent Payslip</label>
+                <input type="file" id="payslip" name="payslip" class="form-control" accept="image/*,application/pdf" required>
+            </div>
+
+            <!-- Button to Move to Next Section (Guarantor 1) -->
+            <div class="form-group text-center">
+                <button type="button" id="next-btn-1" class="btn aqua-btn">Next</button>
+            </div>
+        </div>
+
+        <!-- First Guarantor Details (Initially Hidden) -->
+        <div id="guarantor1-section" style="display: none;">
+            <h3>Guarantor 1 Details</h3>
+
+            <div class="form-group">
+                <label for="guarantor1_name">Full Name</label>
+                <input type="text" id="guarantor1_name" name="guarantor1_name" class="form-control" placeholder="Enter guarantor's full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="guarantor1_email">Email Address</label>
+                <input type="email" id="guarantor1_email" name="guarantor1_email" class="form-control" placeholder="Enter guarantor's email address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="guarantor1_phone">Phone Number</label>
+                <input type="tel" id="guarantor1_phone" name="guarantor1_phone" class="form-control" placeholder="Enter guarantor's phone number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="guarantor1_employment_status">Employment Status</label>
+                <select id="guarantor1_employment_status" name="guarantor1_employment_status" class="form-control" required>
+                    <option value="Employed">Employed</option>
+                    <option value="Self-Employed">Self-Employed</option>
+                    <option value="Unemployed">Unemployed</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="guarantor1_id_number">National ID/Passport Number</label>
+                <input type="text" id="guarantor1_id_number" name="guarantor1_id_number" class="form-control" placeholder="Enter guarantor's ID/Passport number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="guarantor1_payslip">Upload Recent Payslip</label>
+                <input type="file" id="guarantor1_payslip" name="guarantor1_payslip" class="form-control" accept="image/*,application/pdf" required>
+            </div>
+
+            <!-- Button to Move to Previous and Next Sections -->
+            <div class="button-group">
+                <button type="button" id="prev-btn-1" class="btn aqua-btn">Previous</button>
+                <button type="button" id="next-btn-2" class="btn aqua-btn">Next</button>
+            </div>
+        </div>
+
+        <!-- Second Guarantor Details (Initially Hidden) -->
+        <div id="guarantor2-section" style="display: none;">
+            <h3>Guarantor 2 Details</h3>
+
+            <div class="form-group">
+                <label for="guarantor2_name">Full Name</label>
+                <input type="text" id="guarantor2_name" name="guarantor2_name" class="form-control" placeholder="Enter guarantor's full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="guarantor2_email">Email Address</label>
+                <input type="email" id="guarantor2_email" name="guarantor2_email" class="form-control" placeholder="Enter guarantor's email address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="guarantor2_phone">Phone Number</label>
+                <input type="tel" id="guarantor2_phone" name="guarantor2_phone" class="form-control" placeholder="Enter guarantor's phone number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="guarantor2_employment_status">Employment Status</label>
+                <select id="guarantor2_employment_status" name="guarantor2_employment_status" class="form-control" required>
+                    <option value="Employed">Employed</option>
+                    <option value="Self-Employed">Self-Employed</option>
+                    <option value="Unemployed">Unemployed</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="guarantor2_id_number">National ID/Passport Number</label>
+                <input type="text" id="guarantor2_id_number" name="guarantor2_id_number" class="form-control" placeholder="Enter guarantor's ID/Passport number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="guarantor2_payslip">Upload Recent Payslip</label>
+                <input type="file" id="guarantor2_payslip" name="guarantor2_payslip" class="form-control" accept="image/*,application/pdf" required>
+            </div>
+
+            <!-- Final Submit Button -->
+            <div class="form-group text-center">
+                <button type="submit" id="submit-btn" class="btn aqua-btn">Submit Application</button>
+            </div>
+
+            <!-- Button to Move to Previous Section -->
+            <div class="button-group">
+                <button type="button" id="prev-btn-2" class="btn aqua-btn">Previous</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="{% static 'js/dashboard/scripts.js' %}"></script>
+<script>
+    // Next and Previous Button Functions
+    document.getElementById('next-btn-1').addEventListener('click', function() {
+        document.getElementById('borrower-section').style.display = 'none';
+        document.getElementById('guarantor1-section').style.display = 'block';
+    });
+
+    document.getElementById('next-btn-2').addEventListener('click', function() {
+        document.getElementById('guarantor1-section').style.display = 'none';
+        document.getElementById('guarantor2-section').style.display = 'block';
+    });
+
+    document.getElementById('prev-btn-1').addEventListener('click', function() {
+        document.getElementById('guarantor1-section').style.display = 'none';
+        document.getElementById('borrower-section').style.display = 'block';
+    });
+
+    document.getElementById('prev-btn-2').addEventListener('click', function() {
+        document.getElementById('guarantor2-section').style.display = 'none';
+        document.getElementById('guarantor1-section').style.display = 'block';
+    });
+
+    // Form validation to ensure "Next" button is enabled
+    document.getElementById('loan-application-form').addEventListener('input', function() {
+        let isFormValid = true;
+        const inputs = document.querySelectorAll('input[required], select[required]');
+        inputs.forEach(function(input) {
+            if (!input.value) {
+                isFormValid = false;
+            }
+        });
+        document.getElementById('next-btn-1').disabled = !isFormValid;
+    });
+</script>
+{% endblock %}
