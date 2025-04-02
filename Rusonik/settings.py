@@ -42,7 +42,9 @@ SECRET_KEY = 'django-insecure-^tt5cy0f!0b89*j7bou5+vq=-aj5_b%6&p6k@lvzs&=yyz(oa^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'rusonik-loans-application-7.onrender.com',
+]
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'  # Redirect after login
