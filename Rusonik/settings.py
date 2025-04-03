@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,17 +83,24 @@ WSGI_APPLICATION = 'Rusonik.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',  # The MySQL backend
-        'NAME': 'rusonik_loans',  # Name of your MySQL database
-        'USER': 'root',  # MySQL username
-        'PASSWORD': '',  # MySQL password
-        'HOST': 'localhost',  # If MySQL is running locally, use 'localhost'
-        'PORT': '3306',  # Default MySQL port
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',  # The MySQL backend
+#         'NAME': 'rusonik_loans',  # Name of your MySQL database
+#         'USER': 'root',  # MySQL username
+#         'PASSWORD': '',  # MySQL password
+#         'HOST': 'localhost',  # If MySQL is running locally, use 'localhost'
+#         'PORT': '3306',  # Default MySQL port
+#     }
+# }
 
+postgresql://rusonikdb_user:LVt4Z24aYaq7y6JnPcaVaHASNlJg931n@dpg-cvn3ecc9c44c73digl6g-a.oregon-postgres.render.com/rusonikdb
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv("postgresql://rusonikdb_user:LVt4Z24aYaq7y6JnPcaVaHASNlJg931n@dpg-cvn3ecc9c44c73digl6g-a.oregon-postgres.render.com/rusonikdb")  # Will be set in Render environment variables
+    )
+}
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
