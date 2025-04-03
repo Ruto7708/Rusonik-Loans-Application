@@ -97,11 +97,8 @@ WSGI_APPLICATION = 'Rusonik.wsgi.application'
 # postgresql://rusonikdb_user:LVt4Z24aYaq7y6JnPcaVaHASNlJg931n@dpg-cvn3ecc9c44c73digl6g-a.oregon-postgres.render.com/rusonikdb
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv("postgresql://rusonikdb_user:LVt4Z24aYaq7y6JnPcaVaHASNlJg931n@dpg-cvn3ecc9c44c73digl6g-a.oregon-postgres.render.com/rusonikdb")  # Will be set in Render environment variables
-    )
+    'default': dj_database_url.parse("postgresql://rusonikdb_user:LVt4Z24aYaq7y6JnPcaVaHASNlJg931n@dpg-cvn3ecc9c44c73digl6g-a.oregon-postgres.render.com/rusonikdb")
 }
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
