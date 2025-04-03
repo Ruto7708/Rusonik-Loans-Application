@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'Rusonik.wsgi.application'
 #     }
 # }
 
-postgresql://rusonikdb_user:LVt4Z24aYaq7y6JnPcaVaHASNlJg931n@dpg-cvn3ecc9c44c73digl6g-a.oregon-postgres.render.com/rusonikdb
+# postgresql://rusonikdb_user:LVt4Z24aYaq7y6JnPcaVaHASNlJg931n@dpg-cvn3ecc9c44c73digl6g-a.oregon-postgres.render.com/rusonikdb
 
 DATABASES = {
     'default': dj_database_url.config(
